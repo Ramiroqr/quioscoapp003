@@ -9,6 +9,19 @@ const pasos = [
 const Pasos = () => {
     const router = useRouter();
 
+    const calcularProgreso = () => {
+        let valor;
+        if (router.pathname === "/") {
+            valor = 2;
+        } else if (router.pathname === "/resumen") {
+            valor = 50;
+        } else {
+            valor = 100;
+        }
+        return valor;
+    };
+    
+
   return (
     <>
         <div className="flex justify-between mb-5">
@@ -16,11 +29,22 @@ const Pasos = () => {
                 <button 
                     className="text-2xl font-bold bg-indigo-600 hover:bg-indigo-800 text-white px-7 py-2 rounded"
                     key={paso.paso}
-                    onClick={() => router.push(paso.url)}
+                    onClick={() => {
+                        router.push(paso.url);
+                    }}
                 >
                     {paso.nombre}
                 </button>
             ))}
+        </div>
+
+        <div className="bg-gray-100 mb-10">
+            <div 
+                className="rounded-full bg-amber-500 text-xs leading-none h-2 text-center text-white"
+                style={{ width: `${calcularProgreso()}%` }}
+            >
+
+            </div>
         </div>
     </>
   )
